@@ -10,6 +10,10 @@ const BookSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  images: {
+    type: [[String]],
+    required: true,
+  },
   createdBy: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -20,3 +24,28 @@ const BookSchema = new mongoose.Schema({
 });
 const Books = mongoose.model("Books", BookSchema);
 export default Books;
+
+/*
+import mongoose from "mongoose";
+
+const BookSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  dateCreated: {
+    type: Date,
+    default: Date.now,
+  },
+  createdBy: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+  ],
+});
+const Books = mongoose.model("Books", BookSchema);
+export default Books;
+*/

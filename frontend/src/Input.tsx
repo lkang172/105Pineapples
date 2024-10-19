@@ -73,7 +73,7 @@ const Input: React.FC<InputProps> = ({ user }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(generatedStorybook),
+        body: JSON.stringify({ books: generatedStorybook }),
       });
 
       console.log("Storybook generated:", data.message);

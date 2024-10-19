@@ -41,6 +41,25 @@ app.post("/api/signup", async (req, res) => {
   }
 });
 
+app.post("/api/books/:userId", async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const newBook = req.body;
+
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { $push: { books: newBook } }, // Using $push to add the book
+      { new: true } // Return the updated document
+    );
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    console.log("Book added successfully!", updatedUser.books);
+  } catch (error) {
+    console.error("Error adding books:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
 app.post("/api/login", async (req, res) => {
   console.log(req.body); // Log to check request body
   const { username, password } = req.body;
@@ -55,7 +74,7 @@ app.post("/api/login", async (req, res) => {
       name: user.name,
       books: user.books,
       createdAt: user.createdAt,
-      updatedAt: user.updatedAt
+      updatedAt: user.updatedAt,
     });
   } catch (error) {
     console.error("Login error:", error);
@@ -78,13 +97,13 @@ app.post("/api/create", async (req, res) => {
       const newBook = new Books({
         title: title,
         dateCreated: new Date(),
-        createdBy: user._id,
+        createdBy: user.id,
       });
       await newBook.save();
       if (!user.books) {
         user.books = [];
       }
-      if (!user.books.includes(title)){
+      if (!user.books.includes(title)) {
         user.books.push(newBook.title);
       }
       await user.save();
@@ -602,7 +621,7 @@ app.get("/api/books/:userId", async (req, res) => {
   try {
     const userId = req.params.userId;
     const user = await User.findById(req.params.userId).populate("books");
-    
+
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }

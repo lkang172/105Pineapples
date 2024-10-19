@@ -14,9 +14,16 @@ const UserSchema = new mongoose.Schema(
     },
     books: [
       {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Books",
-        required: false,
+        storyScene: [String],
+        images: [[String]],
+        title: {
+          type: String,
+          required: true,
+        },
+        dateCreated: {
+          type: Date,
+          default: Date.now,
+        },
       },
     ],
   },
