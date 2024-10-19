@@ -50,7 +50,7 @@ const Profile: React.FC<ProfileProps> = ({ user }) => {
         if (!response.ok)
           throw new Error(`HTTP Error! Status: ${response.status}`);
         const data = await response.json();
-        console.log("User data:", data); // Log the user data
+        console.log("User data:", data);
         setUserData(data);
 
         const booksResponse = await fetch(
@@ -59,7 +59,7 @@ const Profile: React.FC<ProfileProps> = ({ user }) => {
         if (!booksResponse.ok)
           throw new Error(`HTTP Error! Status: ${booksResponse.status}`);
         const booksData = await booksResponse.json();
-        console.log("Books data:", booksData); // Log the books data
+        console.log("Books data:", booksData);
         setBooks(booksData);
       } catch (error) {
         console.error("Error fetching data:", error);
