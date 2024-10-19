@@ -76,7 +76,6 @@ const Input: React.FC<InputProps> = ({ user }) => {
         body: JSON.stringify({ books: generatedStorybook }),
       });
 
-      console.log("Storybook generated:", data.message);
       setIsGenerating(false);
       navigate("/output", { state: { storybook: generatedStorybook } });
     } catch (error) {

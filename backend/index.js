@@ -48,13 +48,12 @@ app.post("/api/books/:userId", async (req, res) => {
 
     const updatedUser = await User.findByIdAndUpdate(
       userId,
-      { $push: { books: newBook } }, // Using $push to add the book
-      { new: true } // Return the updated document
+      { $push: { books: newBook } },
+      { new: true }
     );
     if (!updatedUser) {
       return res.status(404).json({ message: "User not found" });
     }
-    console.log("Book added successfully!", updatedUser.books);
   } catch (error) {
     console.error("Error adding books:", error);
     res.status(500).json({ message: "Server error" });
@@ -185,7 +184,6 @@ const generateStory = async (theme, lessons) => {
       maxTokens: 600,
       temperature: 0.4,
     });
-    //console.log(response);
     return response.generations[0].text;
   } catch (error) {
     console.error("Error:", error);
@@ -264,7 +262,6 @@ const generateCharacters = async (story) => {
       temperature: 0.3,
     });
     const characterTags = response.generations[0].text;
-    // console.log(characterTags);
     let result = characterTags.split("<character>");
     result = result
       .map((prompt) => prompt.trim())
@@ -276,7 +273,6 @@ const generateCharacters = async (story) => {
           role: splitPrompt[1],
         };
       });
-    //console.log(result);
     return result;
   } catch (error) {
     console.error("Error:", error);
@@ -523,7 +519,6 @@ const generateTitle = async (story) => {
     });
     const title = response.generations[0].text;
     const extractedTitle = title.substring(8, title.length);
-    //console.log(extractedTitle);
     return extractedTitle;
   } catch (error) {
     console.error("Error:", error);
@@ -610,7 +605,7 @@ app.get("/api/user/:userId", async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
     res.json({ username: user.username, name: user.name, books: user.books });
-    console.log("Sending user data:", user);
+    //console.log("Sending user data:", user);
   } catch (error) {
     console.error("Error fetching user:", error);
     res.status(500).json({ message: "Server error" });
