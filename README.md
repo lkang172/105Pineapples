@@ -4,6 +4,8 @@ We built StoryGenie so that every kid can experience the magic of bedtime storie
 
 StoryGenie generates free picture books for families who otherwise can’t afford them. Not only are they valuable educational resources, with studies showing improvements in creativity and social skills for young children, but picture books also lead to cherished family time and lifelong memories.
 
+Demo: https://www.youtube.com/watch?v=DZHcEW6DEd0&t=3s
+
 # Tech Stack
 
 Backend:  `ExpressJS `, `MongoDB`, `NodeJS`  
